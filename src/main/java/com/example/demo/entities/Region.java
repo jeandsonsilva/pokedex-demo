@@ -1,12 +1,10 @@
 package com.example.demo.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,4 +17,11 @@ public class Region {
     @Column(nullable = false)
     private String name;
 
+    @ManyToMany
+    @JoinTable(
+            name = "pokemon_region",
+            joinColumns = @JoinColumn(name = "region_id"),
+            inverseJoinColumns = @JoinColumn(name = "pokemon_id")
+    )
+    private List<Pokemon> pokemons;
 }
