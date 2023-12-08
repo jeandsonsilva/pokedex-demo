@@ -17,12 +17,22 @@ public class Type {
     @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = false)
-    private String vantagem;
-
-    @Column(nullable = false)
-    private String desvantagem;
-
     @ManyToMany(mappedBy = "types")
     private List<Pokemon> pokemons;
+
+    @ManyToMany
+    @JoinTable(
+            name = "type_vantagem",
+            joinColumns = @JoinColumn(name = "type_id"),
+            inverseJoinColumns = @JoinColumn(name = "modify_id")
+    )
+    private List<Modify> vantagens;
+
+    @ManyToMany
+    @JoinTable(
+            name = "type_desvantagem",
+            joinColumns = @JoinColumn(name = "type_id"),
+            inverseJoinColumns = @JoinColumn(name = "modify_id")
+    )
+    private List<Modify> desvantagens;
 }
